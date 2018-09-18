@@ -62,6 +62,9 @@ public class HTTPClient implements AutoCloseable {
 			cookie = WebSecurityHelper.getSSOCookieFromSSOToken();
 			if (cookie != null) {
 				sso = LTPA_TOKEN + "=" + cookie.getValue();
+			} else {
+				String error = "Couldn't extract an SSO Cookie - sso set to null";
+				log.log(Level.SEVERE, error);
 			}
 		} catch (Exception e) {
 			String error = "Exception while extracting SSO Cookie, failed to send request";
